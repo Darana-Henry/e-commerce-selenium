@@ -63,3 +63,5 @@ build
 **/test-output/
 
 *.xml
+
+*.log
