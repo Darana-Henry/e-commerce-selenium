@@ -2,12 +2,16 @@ package testcases;
 
 import base.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class RegisterTest extends TestBase {
 
     @Test
     public void ableToRegisterANewUser() {
+
+        log.debug("ableToRegisterANewUser started");
 
         String registerURL = "https://awesomeqa.com/ui/index.php?route=account/register";
 
@@ -19,5 +23,10 @@ public class RegisterTest extends TestBase {
         driver.findElement(By.id(objectLocatorProps.getProperty("password"))).sendKeys("F6pJhNYa4fLD2M@");
         driver.findElement(By.id(objectLocatorProps.getProperty("passwordConfirm"))).sendKeys("F6pJhNYa4fLD2M@");
         driver.findElement(By.xpath(objectLocatorProps.getProperty("privacyPolicy"))).click();
+
+        WebElement btnContinue = driver.findElement(By.xpath(objectLocatorProps.getProperty("continue")));
+        Assert.assertTrue(btnContinue.isDisplayed());
+
+        log.debug("ableToRegisterANewUser completed");
     }
 }
