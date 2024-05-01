@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'checkstyle'
 }
 
 group 'org.example'
@@ -22,6 +23,39 @@ dependencies {
     implementation 'com.mysql:mysql-connector-j:8.3.0'
     implementation 'org.apache.poi:poi:5.2.5'
 }
+
+checkstyle {
+
+    project.ext.checkstyleVersion = '10.16.0'
+    project.ext.sevntuChecksVersion = '1.44.1'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "https://sevntu-checkstyle.github.com/sevntu.checkstyle/maven2"
+        }
+    }
+
+    ignoreFailures = true
+    configFile = file("${project.rootDir}/checkstyle.xml")
+
+    checkstyleTest {
+        source = sourceSets.test.allSource
+    }
+
+    configurations {
+        checkstyle
+    }
+
+    dependencies {
+        assert project.hasProperty("checkstyleVersion")
+
+        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
+        checkstyle "com.github.sevntu-checkstyle:sevntu-checks:${sevntuChecksVersion}"
+    }
+}
+
 
 test {
     useTestNG()
