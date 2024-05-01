@@ -6,9 +6,11 @@ Welcome to our automated testing framework repository for testing an e-commerce 
 This repository contains code to automate testing procedures using a data-driven framework. Our goal is to develop approximately 50 test cases and integrate various tools into this framework.
 
 ## Tools Included
-- [Gradle](https://gradle.org/) and it's [tutorial](https://www.youtube.com/playlist?list=PL0UJI1nZ56yDZSgsL1Gf4_krgTMhuotYM)
-- [TestNG](https://testng.org/) and it's [tutorial](https://www.youtube.com/playlist?list=PLL34mf651faMJ3uO8RNEh1GM5uLVXWq2Z)
-- [Log4J](https://logging.apache.org/log4j/2.x/) and it's [tutorial](https://www.youtube.com/playlist?list=PLb0pWz-jnz99Sp6iQxjW-FpmFZp0OfZlc)
+- [Gradle](https://gradle.org/) | [tutorial](https://www.youtube.com/playlist?list=PL0UJI1nZ56yDZSgsL1Gf4_krgTMhuotYM)
+- [TestNG](https://testng.org/) | [tutorial](https://www.youtube.com/playlist?list=PLL34mf651faMJ3uO8RNEh1GM5uLVXWq2Z)
+- [Log4J](https://logging.apache.org/log4j/2.x/) | [tutorial](https://www.youtube.com/playlist?list=PLb0pWz-jnz99Sp6iQxjW-FpmFZp0OfZlc)
+- [Apache POI](https://poi.apache.org/) | [tutorial](https://www.youtube.com/playlist?list=PLUDwpEzHYYLsN1kpIjOyYW6j_GLgOyA07)
+- [ReportNG](https://reportng.uncommons.org/) | [decommissioned](https://github.com/dwdyer/reportng)
 - Sample test case
 - Property files and their readers
 

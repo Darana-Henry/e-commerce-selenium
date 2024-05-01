@@ -4,6 +4,7 @@ import base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 public class RegisterTest extends TestBase {
@@ -24,9 +25,19 @@ public class RegisterTest extends TestBase {
         driver.findElement(By.id(objectLocatorProps.getProperty("passwordConfirm"))).sendKeys("F6pJhNYa4fLD2M@");
         driver.findElement(By.xpath(objectLocatorProps.getProperty("privacyPolicy"))).click();
 
+        Reporter.log("navigated to registration page");
+        Reporter.log("added first name");
+        Reporter.log("added last name");
+        Reporter.log("added email");
+        Reporter.log("added phone number");
+        Reporter.log("added password");
+        Reporter.log("confirmed the password");
+        Reporter.log("checked privacy policy");
+
         WebElement btnContinue = driver.findElement(By.xpath(objectLocatorProps.getProperty("continue")));
         Assert.assertTrue(btnContinue.isDisplayed());
 
         log.debug("ableToRegisterANewUser completed");
+
     }
 }
