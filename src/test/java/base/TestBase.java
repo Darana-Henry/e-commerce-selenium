@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
+import utilities.ExcelReader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class TestBase {
     public static String userDir;
     //public static Logger log = Logger.getLogger("devpinoyLogger");
     public static Logger log = LogManager.getLogger(TestBase.class.getName());
+    public static ExcelReader reader;
 
     @BeforeSuite
     public void setup() {
@@ -41,6 +43,7 @@ public class TestBase {
                 fis = new FileInputStream(userDir + "/src/test/resources/properties/object-repository.properties");
                 objectLocatorProps.load(fis);
                 log.debug("Object Locator Properties file loaded.");
+                reader = new ExcelReader(userDir + "/src/test/resources/excels/test-data.xlsx");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -49,7 +52,7 @@ public class TestBase {
                 case "chrome":
                     WebDriverManager.chromedriver().clearDriverCache().setup();
                     ChromeOptions cOptions = new ChromeOptions();
-                    cOptions.addArguments("--headless");
+                    //cOptions.addArguments("--headless");
                     driver = new ChromeDriver(cOptions);
                     log.debug("Chrome browser launched.");
                     break;
