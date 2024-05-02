@@ -12,6 +12,7 @@ public class SearchTest extends TestBase {
     public void ableToSearchProducts(String name, String price) {
 
         log.debug("ableToSearchProducts started");
+        test.info("ableToSearchProducts started").assignAuthor("Hank").assignCategory("Search");
         String searchURL = "https://awesomeqa.com/ui/index.php?route=common/home";
 
         driver.get(searchURL);
@@ -21,11 +22,13 @@ public class SearchTest extends TestBase {
         String productName = driver.findElement(By.xpath(objectLocatorProps.getProperty("productName"))).getText();
         String productPrice = driver.findElement(By.xpath(objectLocatorProps.getProperty("productPrice"))).getText();
         productPrice = processAndSplit(productPrice);
+        test.info(productName + " " + productPrice);
 
         Assert.assertEquals(productName, name);
         Assert.assertEquals(productPrice, price);
 
         log.debug("ableToSearchProducts completed");
+        test.info("ableToSearchProducts completed");
     }
 
     @DataProvider(name = "productNamesAndPrices")

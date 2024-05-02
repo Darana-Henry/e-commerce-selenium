@@ -13,6 +13,7 @@ public class RegisterTest extends TestBase {
     public void ableToRegisterANewUser() {
 
         log.debug("ableToRegisterANewUser started");
+        test.info("ableToRegisterANewUser started").assignAuthor("Henry").assignCategory("Register");
 
         String registerURL = "https://awesomeqa.com/ui/index.php?route=account/register";
 
@@ -34,10 +35,20 @@ public class RegisterTest extends TestBase {
         Reporter.log("confirmed the password");
         Reporter.log("checked privacy policy");
 
+        test.info("navigated to registration page");
+        test.info("added first name");
+        test.info("added last name");
+        test.info("added email");
+        test.info("added phone number");
+        test.info("added password");
+        test.info("confirmed the password");
+        test.info("checked privacy policy");
+
         WebElement btnContinue = driver.findElement(By.xpath(objectLocatorProps.getProperty("continue")));
         Assert.assertTrue(btnContinue.isDisplayed());
 
         log.debug("ableToRegisterANewUser completed");
+        test.info("ableToRegisterANewUser completed");
 
     }
 }

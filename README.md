@@ -11,6 +11,7 @@ This repository contains code to automate testing procedures using a data-driven
 - [Log4J](https://logging.apache.org/log4j/2.x/) | [tutorial](https://www.youtube.com/playlist?list=PLb0pWz-jnz99Sp6iQxjW-FpmFZp0OfZlc)
 - [Apache POI](https://poi.apache.org/) | [tutorial](https://www.youtube.com/playlist?list=PLUDwpEzHYYLsN1kpIjOyYW6j_GLgOyA07)
 - [ReportNG](https://reportng.uncommons.org/) | [decommissioned](https://github.com/dwdyer/reportng)
+- [Extent Reports](https://www.extentreports.com/docs/versions/5/java/index.html) | [tutorial](https://www.youtube.com/playlist?list=PL9ok7C7Yn9A-yUEnE62gOQ2B4pL3gsC28)
 - Sample test case
 - Property files and their readers
 
