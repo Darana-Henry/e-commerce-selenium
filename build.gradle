@@ -63,5 +63,7 @@ checkstyle {
 
 
 test {
-    useTestNG()
+    useTestNG {
+        suites 'src/test/resources/runners/testng.xml'
+    }
 }

@@ -44,13 +44,6 @@ public class SearchTest extends TestBase {
         }
 
         return data;
-
-//        return new Object[][]
-//                {
-//                        {"Canon EOS 5D", "$98.00"},
-//                        {"Samsung Galaxy Tab 10.1", "$241.99"},
-//                        {"MacBook Air", "$1,202.00"}
-//                };
     }
 
     public static String processAndSplit(String input) {

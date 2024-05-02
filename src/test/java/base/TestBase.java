@@ -52,7 +52,7 @@ public class TestBase {
                 case "chrome":
                     WebDriverManager.chromedriver().clearDriverCache().setup();
                     ChromeOptions cOptions = new ChromeOptions();
-                    //cOptions.addArguments("--headless");
+                    cOptions.addArguments("--headless");
                     driver = new ChromeDriver(cOptions);
                     log.debug("Chrome browser launched.");
                     break;
