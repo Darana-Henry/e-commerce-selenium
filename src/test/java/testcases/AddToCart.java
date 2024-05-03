@@ -21,7 +21,7 @@ public class AddToCart extends TestBase {
         driver.get(loginURL);
 
         sendKeys(By.id(objectLocatorProps.getProperty("emailTxt")), "emailTxt", "first.last@gmail.com");
-        sendKeys(By.id(objectLocatorProps.getProperty("passwordTxt")), "passwordTxt", "password");
+        sendKeys(By.id(objectLocatorProps.getProperty("passwordTxt")), "passwordTxt", "");
         click(By.xpath(objectLocatorProps.getProperty("loginBtn")), "loginBtn");
 
         String expectedMyAccountLbl = "My Account";
