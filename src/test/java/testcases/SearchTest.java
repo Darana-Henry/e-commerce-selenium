@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class SearchTest extends TestBase {
 
-    @Test(dataProvider = "productNamesAndPrices")
+    @Test(dataProvider = "ableToSearchProductsDP")
     public void ableToSearchProducts(String name, String price) {
 
         log.debug("ableToSearchProducts started");
@@ -16,8 +16,10 @@ public class SearchTest extends TestBase {
         String searchURL = "https://awesomeqa.com/ui/index.php?route=common/home";
 
         driver.get(searchURL);
-        driver.findElement(By.xpath(objectLocatorProps.getProperty("searchBox"))).sendKeys(name);
-        driver.findElement(By.xpath(objectLocatorProps.getProperty("searchBtn"))).click();
+        test.info("navigated to home page");
+
+        sendKeys(By.xpath(objectLocatorProps.getProperty("searchBox")), "searchBox", name);
+        click(By.xpath(objectLocatorProps.getProperty("searchBtn")), "searchBtn");
 
         String productName = driver.findElement(By.xpath(objectLocatorProps.getProperty("productName"))).getText();
         String productPrice = driver.findElement(By.xpath(objectLocatorProps.getProperty("productPrice"))).getText();
@@ -31,8 +33,8 @@ public class SearchTest extends TestBase {
         test.info("ableToSearchProducts completed");
     }
 
-    @DataProvider(name = "productNamesAndPrices")
-    public Object[][] productNamesAndPrices() {
+    @DataProvider(name = "ableToSearchProductsDP")
+    public Object[][] ableToSearchProductsDP() {
 
         String sheetName = "ableToSearchProducts";
         int rows = reader.getRowCount(sheetName);

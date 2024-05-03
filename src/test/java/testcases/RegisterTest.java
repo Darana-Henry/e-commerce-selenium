@@ -18,13 +18,16 @@ public class RegisterTest extends TestBase {
         String registerURL = "https://awesomeqa.com/ui/index.php?route=account/register";
 
         driver.get(registerURL);
-        driver.findElement(By.id(objectLocatorProps.getProperty("firstName"))).sendKeys("John");
-        driver.findElement(By.id(objectLocatorProps.getProperty("lastName"))).sendKeys("Doe");
-        driver.findElement(By.id(objectLocatorProps.getProperty("email"))).sendKeys("john.doe@gmail.com");
-        driver.findElement(By.id(objectLocatorProps.getProperty("telephone"))).sendKeys("000-000-0000");
-        driver.findElement(By.id(objectLocatorProps.getProperty("password"))).sendKeys("F6pJhNYa4fLD2M@");
-        driver.findElement(By.id(objectLocatorProps.getProperty("passwordConfirm"))).sendKeys("F6pJhNYa4fLD2M@");
-        driver.findElement(By.xpath(objectLocatorProps.getProperty("privacyPolicy"))).click();
+        test.info("navigated to registration page");
+
+        sendKeys(By.id(objectLocatorProps.getProperty("firstName")), "firstName", "John");
+
+        sendKeys(By.id(objectLocatorProps.getProperty("lastName")), "lastName", "Doe");
+        sendKeys(By.id(objectLocatorProps.getProperty("email")), "email", "john.doe@gmail.com");
+        sendKeys(By.id(objectLocatorProps.getProperty("telephone")), "telephone", "000-000-0000");
+        sendKeys(By.id(objectLocatorProps.getProperty("password")), "password", "F6pJhNYa4fLD2M@");
+        sendKeys(By.id(objectLocatorProps.getProperty("passwordConfirm")), "passwordConfirm", "F6pJhNYa4fLD2M@");
+        click(By.xpath(objectLocatorProps.getProperty("privacyPolicy")), "privacyPolicy");
 
         Reporter.log("navigated to registration page");
         Reporter.log("added first name");
@@ -34,15 +37,6 @@ public class RegisterTest extends TestBase {
         Reporter.log("added password");
         Reporter.log("confirmed the password");
         Reporter.log("checked privacy policy");
-
-        test.info("navigated to registration page");
-        test.info("added first name");
-        test.info("added last name");
-        test.info("added email");
-        test.info("added phone number");
-        test.info("added password");
-        test.info("confirmed the password");
-        test.info("checked privacy policy");
 
         WebElement btnContinue = driver.findElement(By.xpath(objectLocatorProps.getProperty("continue")));
         Assert.assertTrue(btnContinue.isDisplayed());

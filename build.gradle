@@ -11,8 +11,6 @@ repositories {
 }
 
 dependencies {
-    //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    //testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.20.0'
     implementation 'org.uncommons:reportng:1.1.4'
@@ -25,9 +23,19 @@ dependencies {
     implementation 'org.apache.poi:poi-ooxml:5.2.5'
     implementation 'org.dom4j:dom4j:2.1.4'
     implementation 'org.apache.xmlbeans:xmlbeans:5.2.0'
-    //implementation 'org.apache.poi:poi-ooxml-schemas:4.1.2'
-    //implementation 'org.apache.poi:poi-ooxml-full:5.2.5'
 }
+
+task cleanScreenshots(type: Delete) {
+    delete '/src/test/resources/screenshots/.*'
+}
+
+task cleanTestOutput(type: Delete) {
+    delete 'test-output'
+}
+
+// Configure task dependencies
+clean.dependsOn cleanScreenshots, cleanTestOutput
+
 
 checkstyle {
 
@@ -60,7 +68,6 @@ checkstyle {
         checkstyle "com.github.sevntu-checkstyle:sevntu-checks:${sevntuChecksVersion}"
     }
 }
-
 
 test {
     useTestNG {

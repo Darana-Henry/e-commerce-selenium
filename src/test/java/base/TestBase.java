@@ -5,7 +5,9 @@ import com.aventstack.extentreports.ExtentTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -57,8 +59,10 @@ public class TestBase {
                 case "chrome":
                     WebDriverManager.chromedriver().clearDriverCache().setup();
                     ChromeOptions cOptions = new ChromeOptions();
-                    cOptions.addArguments("--headless");
+                    //cOptions.addArguments("--headless");
                     driver = new ChromeDriver(cOptions);
+                    driver.manage().timeouts().implicitlyWait(
+                            Duration.ofSeconds(Long.parseLong(configProps.getProperty("iWait"))));
                     log.debug("Chrome browser launched.");
                     break;
                 case "firefox":
@@ -94,5 +98,22 @@ public class TestBase {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void click(By by, String locator) {
+        WebElement e = driver.findElement(by);
+        e.click();
+        test.info("Clicked On: " + locator);
+    }
+
+    public void click(WebElement e, String locator) {
+        e.click();
+        test.info("Clicked On: " + locator);
+    }
+
+    public void sendKeys(By by, String locator, String text) {
+        WebElement e = driver.findElement(by);
+        e.sendKeys(text);
+        test.info("Typed In: " + text + " into " + locator);
     }
 }
