@@ -113,6 +113,7 @@ public class TestBase {
 
     public void sendKeys(By by, String locator, String text) {
         WebElement e = driver.findElement(by);
+        e.clear();
         e.sendKeys(text);
         test.info("Typed In: " + text + " into " + locator);
     }

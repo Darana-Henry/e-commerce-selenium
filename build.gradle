@@ -15,6 +15,7 @@ dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:4.20.0'
     implementation 'org.uncommons:reportng:1.1.4'
     implementation 'com.aventstack:extentreports:5.1.1'
+    implementation "org.apache.logging.log4j:log4j-api:2.14.0"
     implementation 'org.apache.logging.log4j:log4j-core:2.23.1'
     implementation 'javax.mail:javax.mail-api:1.6.2'
     implementation 'com.google.inject:guice:7.0.0'
@@ -26,7 +27,7 @@ dependencies {
 }
 
 task cleanScreenshots(type: Delete) {
-    delete '/src/test/resources/screenshots/.*'
+    delete 'src/test/resources/screenshots/*'
 }
 
 task cleanTestOutput(type: Delete) {

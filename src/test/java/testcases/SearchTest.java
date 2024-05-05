@@ -5,11 +5,15 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utilities.TestUtils;
+
+import java.util.HashMap;
+import java.util.Hashtable;
 
 public class SearchTest extends TestBase {
 
-    @Test(dataProvider = "ableToSearchProductsDP")
-    public void ableToSearchProducts(String name, String price) {
+    @Test(dataProviderClass = TestUtils.class, dataProvider = "dp")
+    public void ableToSearchProducts(Hashtable<String, String> data) {
 
         log.debug("ableToSearchProducts started");
         test.info("ableToSearchProducts started").assignAuthor("Hank").assignCategory("Search");
@@ -18,7 +22,7 @@ public class SearchTest extends TestBase {
         driver.get(searchURL);
         test.info("navigated to home page");
 
-        sendKeys(By.xpath(objectLocatorProps.getProperty("searchBox")), "searchBox", name);
+        sendKeys(By.xpath(objectLocatorProps.getProperty("searchBox")), "searchBox", data.get("ProductName"));
         click(By.xpath(objectLocatorProps.getProperty("searchBtn")), "searchBtn");
 
         String productName = driver.findElement(By.xpath(objectLocatorProps.getProperty("productName"))).getText();
@@ -26,29 +30,11 @@ public class SearchTest extends TestBase {
         productPrice = processAndSplit(productPrice);
         test.info(productName + " " + productPrice);
 
-        Assert.assertEquals(productName, name);
-        Assert.assertEquals(productPrice, price);
+        Assert.assertEquals(productName, data.get("ProductName"));
+        Assert.assertEquals(productPrice, data.get("ProductPrice"));
 
         log.debug("ableToSearchProducts completed");
         test.info("ableToSearchProducts completed");
-    }
-
-    @DataProvider(name = "ableToSearchProductsDP")
-    public Object[][] ableToSearchProductsDP() {
-
-        String sheetName = "ableToSearchProducts";
-        int rows = reader.getRowCount(sheetName);
-        int columns = reader.getColumnCount(sheetName);
-        Object[][] data = new Object[rows - 1][columns];
-
-        for (int iRow = 2; iRow <= rows; iRow++) {
-            for (int iCol = 0; iCol < columns; iCol++) {
-                data[iRow - 2][iCol] = reader.getCellData(sheetName, iCol, iRow);
-            }
-
-        }
-
-        return data;
     }
 
     public static String processAndSplit(String input) {

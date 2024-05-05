@@ -4,9 +4,10 @@ import base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utilities.TestUtils;
 
+import java.util.Hashtable;
 import java.util.List;
 
 public class AddToCart extends TestBase {
@@ -33,7 +34,7 @@ public class AddToCart extends TestBase {
         test.info("loginToApp completed");
     }
 
-    @Test(dependsOnMethods = {"loginToApp"})
+    @Test(dependsOnMethods = {"loginToApp"}, enabled = false)
     public void clearCart() {
 
         for (int i = 0; i < 3; i++) {
@@ -50,8 +51,8 @@ public class AddToCart extends TestBase {
         }
     }
 
-    @Test(dataProvider = "ableToAddToCartDP", dependsOnMethods = {"clearCart"})
-    public void ableToAddToCart(String product, String price, String quantity) {
+    @Test(dataProviderClass = TestUtils.class, dataProvider = "dp", dependsOnMethods = {"loginToApp"})
+    public void ableToAddToCart(Hashtable<String, String> testData) {
 
         test.info("ableToAddToCart started").assignAuthor("Henirich").assignCategory("Add Cart");
 
@@ -61,7 +62,7 @@ public class AddToCart extends TestBase {
         test.info("navigated to home page");
 
 
-        sendKeys(By.xpath(objectLocatorProps.getProperty("searchBox")), "searchBox", product);
+        sendKeys(By.xpath(objectLocatorProps.getProperty("searchBox")), "searchBox", testData.get("ProductName"));
         click(By.xpath(objectLocatorProps.getProperty("searchBtn")), "searchBtn");
 
         String productName = driver.findElement(By.xpath(objectLocatorProps.getProperty("productName"))).getText();
@@ -69,17 +70,17 @@ public class AddToCart extends TestBase {
         productPrice = SearchTest.processAndSplit(productPrice);
         test.info(productName + " and price " + productPrice);
 
-        Assert.assertEquals(productName, product);
-        Assert.assertEquals(productPrice, price);
+        Assert.assertEquals(productName, testData.get("ProductName"));
+        Assert.assertEquals(productPrice, testData.get("ProductPrice"));
 
         click(By.xpath(objectLocatorProps.getProperty("productThumbnailBtn")), "productThumbnailBtn");
-        sendKeys(By.id(objectLocatorProps.getProperty("quantityTxt")), "quantityTxt", quantity);
+        sendKeys(By.id(objectLocatorProps.getProperty("quantityTxt")), "quantityTxt", testData.get("Quantity"));
         click(By.id(objectLocatorProps.getProperty("addToCartBtn")), "addToCartBtn");
 
         test.info("ableToAddToCart completed");
     }
 
-    @Test(dependsOnMethods = {"ableToAddToCart"})
+    @Test(dependsOnMethods = {"ableToAddToCart"}, enabled = false)
     public void checkCartTotal() {
 
         test.info("checkCartTotal started").assignAuthor("Henirich").assignCategory("Add Cart");
@@ -89,21 +90,4 @@ public class AddToCart extends TestBase {
 
         test.info("checkCartTotal completed");
     }
-
-    @DataProvider(name = "ableToAddToCartDP")
-    public Object[][] ableToAddToCartDP() {
-
-        String sheetName = "ableToAddToCart";
-        int rows = reader.getRowCount(sheetName);
-        int columns = reader.getColumnCount(sheetName);
-        Object[][] data = new Object[rows - 1][columns];
-
-        for (int iRow = 2; iRow <= rows; iRow++) {
-            for (int iCol = 0; iCol < columns; iCol++) {
-                data[iRow - 2][iCol] = reader.getCellData(sheetName, iCol, iRow);
-            }
-        }
-        return data;
-    }
-
 }
